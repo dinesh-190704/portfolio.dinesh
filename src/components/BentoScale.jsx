@@ -48,7 +48,7 @@ export default function BentoScale() {
           transition={{ duration: 1.2 }}
           className="text-center mb-16 md:mb-20"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground text-tight mb-6 md:mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-tight mb-6 md:mb-8">
             Scale & Security
           </h2>
           <p className="text-lg md:text-xl text-muted max-w-4xl mx-auto text-professional leading-relaxed">

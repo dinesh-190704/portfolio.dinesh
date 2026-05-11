@@ -117,8 +117,23 @@
     }
     
     /* Fix text sizes */
+    .text-2xl {
+      font-size: 1.5rem !important;
+      line-height: 1.2 !important;
+    }
+    
+    .text-3xl {
+      font-size: 1.75rem !important;
+      line-height: 1.2 !important;
+    }
+    
     .text-4xl {
       font-size: 2rem !important;
+      line-height: 1.2 !important;
+    }
+    
+    .text-5xl {
+      font-size: 2.25rem !important;
       line-height: 1.2 !important;
     }
     
@@ -157,12 +172,24 @@
       padding-right: 0.5rem;
     }
     
-    .text-4xl {
+    .text-2xl {
+      font-size: 1.25rem !important;
+    }
+    
+    .text-3xl {
       font-size: 1.5rem !important;
     }
     
-    .text-6xl {
+    .text-4xl {
+      font-size: 1.75rem !important;
+    }
+    
+    .text-5xl {
       font-size: 2rem !important;
+    }
+    
+    .text-6xl {
+      font-size: 2.25rem !important;
     }
     
     .achievement-badge,
