@@ -7,13 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#0A0A0A',
+        background: '#FFFFFF',
         surface: '#1A1A1A',
         'surface-elevated': '#252525',
         border: 'rgba(255,255,255,0.1)',
         'border-hover': 'rgba(255,255,255,0.2)',
-        foreground: '#FFFFFF',
-        muted: '#9CA3AF',
+        foreground: '#000000',
+        muted: '#666666',
         'muted-foreground': '#9CA3AF',
         accent: {
           DEFAULT: '#2563EB',
