@@ -6,7 +6,7 @@ export const persistentStorage = {
   async loadCertificates() {
     try {
       // Try to load from the data file first
-      const response = await fetch('/src/data/certificates.json');
+      const response = await fetch('/data/certificates.json');
       if (response.ok) {
         const data = await response.json();
         console.log('Loaded certificates from data file:', Object.keys(data.uploadedCertificates || {}).length);
@@ -63,7 +63,7 @@ export const persistentStorage = {
   async loadResume() {
     try {
       // Try to load from the data file first
-      const response = await fetch('/src/data/resume.json');
+      const response = await fetch('/data/resume.json');
       if (response.ok) {
         const data = await response.json();
         console.log('Loaded resume from data file:', data.resumeUrl ? 'URL found' : 'No URL');
