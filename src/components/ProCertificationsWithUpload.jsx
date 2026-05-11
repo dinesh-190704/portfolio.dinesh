@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import { Upload, X, FileText, Download, Check, Shield } from 'lucide-react';
+import { Upload, X, FileText, Download, Check, Shield, Award } from 'lucide-react';
 
 const certs = [
   {
