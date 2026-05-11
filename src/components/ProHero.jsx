@@ -46,7 +46,7 @@ export default function ProHero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 max-w-2xl mx-auto"
+            className="flex flex-col sm:flex-row items-center justify-center gap-2 max-w-2xl mx-auto"
           >
             <div className="flex items-center gap-3 px-6 py-3 glass-card glass-card-hover">
               <Database className="text-accent" size={20} />
