@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, Upload, FileText, AlertCircle, Shield, Trash2, X, Check, Eye, EyeOff } from 'lucide-react';
+import { Upload, X, FileText, Download, Shield, Eye, EyeOff, Trash2 } from 'lucide-react';
+import { persistentStorage } from '../utils/storage';
 
 const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -43,18 +44,19 @@ export default function ProResumeManager() {
   const [loginError, setLoginError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  // Load resume from localStorage on component mount
+  // Load resume from persistent storage on component mount
   useEffect(() => {
-    const savedResume = localStorage.getItem('uploadedResume');
-    if (savedResume) {
+    const loadResume = async () => {
       try {
-        const parsedResume = JSON.parse(savedResume);
-        setResumeUrl(parsedResume.fileUrl);
+        const savedResume = await persistentStorage.loadResume();
+        setResumeUrl(savedResume);
       } catch (error) {
-        console.error('Failed to load resume from localStorage:', error);
-        localStorage.removeItem('uploadedResume');
+        console.error('Failed to load resume from persistent storage:', error);
+        setResumeUrl(null);
       }
-    }
+    };
+
+    loadResume();
   }, []);
 
   // Listen for admin portal trigger from navigation
@@ -86,7 +88,7 @@ export default function ProResumeManager() {
     try {
       // Convert file to base64
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = async (e) => {
         const base64Data = e.target.result;
         const resumeData = {
           fileName: file.name,
@@ -95,7 +97,7 @@ export default function ProResumeManager() {
         };
         
         setResumeUrl(base64Data);
-        localStorage.setItem('uploadedResume', JSON.stringify(resumeData));
+        await persistentStorage.saveResume(base64Data);
         setUploading(false);
         console.log('Resume uploaded successfully:', file.name);
       };
@@ -116,7 +118,7 @@ export default function ProResumeManager() {
     setDeleting(true);
     try {
       setResumeUrl(null);
-      localStorage.removeItem('uploadedResume');
+      await persistentStorage.saveResume(null);
     } catch (error) {
       console.error('Delete failed:', error);
     } finally {

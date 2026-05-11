@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
-import { Award, Shield, Database, Router, Cpu, Clock, Star, Upload, FileText, X, Check, Download } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Upload, X, FileText, Download, Check, Shield } from 'lucide-react';
+import { persistentStorage } from '../utils/storage';
 
 const certs = [
   {
@@ -67,42 +68,28 @@ export default function ProCertificationsWithUpload() {
   const [selectedCert, setSelectedCert] = useState(null);
   const [uploading, setUploading] = useState(false);
 
-  // Load certificates from localStorage on component mount
+  // Load certificates from persistent storage on component mount
   useEffect(() => {
-    const loadCertificates = () => {
+    const loadCertificates = async () => {
       try {
-        const savedCerts = localStorage.getItem('uploadedCertificates');
-        if (savedCerts) {
-          const parsedCerts = JSON.parse(savedCerts);
-          // Validate the loaded data
-          if (parsedCerts && typeof parsedCerts === 'object') {
-            setUploadedCerts(parsedCerts);
-            console.log('Loaded certificates from localStorage:', Object.keys(parsedCerts).length);
-          } else {
-            localStorage.removeItem('uploadedCertificates');
-          }
-        }
+        const savedCerts = await persistentStorage.loadCertificates();
+        setUploadedCerts(savedCerts);
       } catch (error) {
-        console.error('Failed to load certificates from localStorage:', error);
-        localStorage.removeItem('uploadedCertificates');
+        console.error('Failed to load certificates from persistent storage:', error);
+        setUploadedCerts({});
       }
     };
 
     loadCertificates();
   }, []);
 
-  // Save certificates to localStorage whenever they change
+  // Save certificates to persistent storage whenever they change
   useEffect(() => {
-    const saveCertificates = () => {
+    const saveCertificates = async () => {
       try {
-        if (Object.keys(uploadedCerts).length > 0) {
-          localStorage.setItem('uploadedCertificates', JSON.stringify(uploadedCerts));
-          console.log('Saved certificates to localStorage:', Object.keys(uploadedCerts).length);
-        } else {
-          localStorage.removeItem('uploadedCertificates');
-        }
+        await persistentStorage.saveCertificates(uploadedCerts);
       } catch (error) {
-        console.error('Failed to save certificates to localStorage:', error);
+        console.error('Failed to save certificates to persistent storage:', error);
       }
     };
 
@@ -230,10 +217,10 @@ export default function ProCertificationsWithUpload() {
               className="flex justify-center"
             >
               <button
-                onClick={() => {
+                onClick={async () => {
                   if (window.confirm('Are you sure you want to remove all uploaded certificates? This action cannot be undone.')) {
+                    await persistentStorage.clearAllCertificates();
                     setUploadedCerts({});
-                    localStorage.removeItem('uploadedCertificates');
                   }
                 }}
                 className="px-4 md:px-6 py-2 md:py-3 bg-red-500/20 text-red-400 rounded-lg hover:bg-red-500/30 transition-all duration-300 border border-red-500/30 text-sm md:text-base font-medium"
