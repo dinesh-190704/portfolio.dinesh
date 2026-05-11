@@ -1,16 +1,49 @@
-# React + Vite
+# portfolio.dinesh
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Professional Security Portfolio - A modern React-based portfolio showcasing expertise in healthcare IT infrastructure, database administration, and security operations.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Modern Tech Stack:** React + Vite + Tailwind CSS
+- **Security Theme**: Professional dark theme with security green (#00FF41) and blue accents
+- **Smooth Animations**: Framer Motion for fluid transitions
+- **Responsive Design**: Optimized for all devices
+- **Glass Morphism**: Modern UI with glass card effects
+- **Corporate Security Styling**: Professional appearance suitable for security professionals
 
-## React Compiler
+## Sections
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Hero**: Professional introduction with animated background
+- **About**: Detailed professional background
+- **Experience**: Healthcare IT infrastructure and database administration
+- **Skills**: Technical expertise and certifications
+- **Infrastructure Stack**: Enterprise technologies
+- **Scale & Security**: Security metrics and compliance
+- **Certifications**: Professional certifications with upload functionality
+- **Resume**: Downloadable resume with admin management
+- **Contact**: Professional contact information
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend**: React 18, Vite
+- **Styling**: Tailwind CSS with custom security theme
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Build Tool**: Vite
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Author
+
+Dinesh M - Healthcare IT Professional | Database Administrator | Security Specialist
