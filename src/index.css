@@ -30,6 +30,14 @@
     user-scalable: no;
   }
 
+  /* Force mobile layout fixes */
+  * {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   /* Responsive container fixes */
   .container-responsive {
     width: 100%;
@@ -40,10 +48,84 @@
     margin-right: auto;
   }
 
-  @media (max-width: 640px) {
+  /* Mobile-specific fixes */
+  @media (max-width: 768px) {
+    body {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    
     .container-responsive {
       padding-left: 0.75rem;
       padding-right: 0.75rem;
+    }
+    
+    /* Fix overflow issues */
+    .pro-section {
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
+    }
+    
+    /* Fix grid layouts on mobile */
+    .grid {
+      grid-template-columns: 1fr !important;
+      gap: 1rem !important;
+    }
+    
+    /* Fix text sizes */
+    .text-4xl {
+      font-size: 2rem !important;
+      line-height: 1.2 !important;
+    }
+    
+    .text-6xl {
+      font-size: 2.5rem !important;
+      line-height: 1.2 !important;
+    }
+    
+    /* Fix card layouts */
+    .achievement-badge,
+    .glass-card,
+    .bento-card {
+      min-height: auto !important;
+      padding: 1rem !important;
+    }
+    
+    /* Fix navigation */
+    nav {
+      padding: 0.5rem 1rem !important;
+    }
+    
+    /* Fix modal layouts */
+    .glass-card {
+      margin: 1rem !important;
+      max-width: calc(100vw - 2rem) !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    body {
+      font-size: 14px;
+    }
+    
+    .container-responsive {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+    
+    .text-4xl {
+      font-size: 1.5rem !important;
+    }
+    
+    .text-6xl {
+      font-size: 2rem !important;
+    }
+    
+    .achievement-badge,
+    .glass-card,
+    .bento-card {
+      padding: 0.75rem !important;
     }
   }
 

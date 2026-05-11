@@ -37,7 +37,7 @@ export default function ProNavbar() {
           : 'bg-transparent border-b border-transparent'
       )}
     >
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
         <a
           href="#"
           onClick={(e) => {
@@ -100,7 +100,7 @@ export default function ProNavbar() {
           exit={{ opacity: 0, y: -20 }}
           className="lg:hidden bg-black/95 backdrop-blur-2xl border-b border-white/[0.08] shadow-lg"
         >
-          <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-2">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex flex-col gap-1 sm:gap-2">
             {navLinks.map((link) => (
               <a
                 key={link.href}

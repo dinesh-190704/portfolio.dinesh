@@ -9,23 +9,23 @@ import ProFooter from './components/ProFooter'
 
 function App() {
   return (
-    <div className="min-h-screen bg-background text-foreground smooth-scroll">
+    <div className="min-h-screen bg-background text-foreground smooth-scroll overflow-x-hidden">
       <ProNavbar />
-      <main>
+      <main className="w-full max-w-full overflow-x-hidden">
         <ProHero />
-        <section id="experience">
+        <section id="experience" className="w-full max-w-full overflow-x-hidden">
           <ProfessionalExperience />
         </section>
-        <section id="scale-security">
+        <section id="scale-security" className="w-full max-w-full overflow-x-hidden">
           <BentoScale />
         </section>
-        <section id="certifications">
+        <section id="certifications" className="w-full max-w-full overflow-x-hidden">
           <ProCertificationsWithUpload />
         </section>
-        <section id="infrastructure">
+        <section id="infrastructure" className="w-full max-w-full overflow-x-hidden">
           <InfrastructureStack />
         </section>
-        <section id="resume">
+        <section id="resume" className="w-full max-w-full overflow-x-hidden">
           <ProResumeManager />
         </section>
         <section id="contact">
