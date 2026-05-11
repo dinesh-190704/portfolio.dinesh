@@ -57,7 +57,7 @@ export default function ScaleSecurity() {
               <div className="apple-metric text-foreground text-tight mb-4">
                 {metric.number}
               </div>
-              <div className="text-2xl md:text-3xl font-semibold text-foreground text-tight mb-3">
+              <div className="text-base md:text-xl font-semibold text-foreground text-tight mb-3">
                 {metric.label}
               </div>
               <p className="text-base text-muted leading-relaxed max-w-md mx-auto">
