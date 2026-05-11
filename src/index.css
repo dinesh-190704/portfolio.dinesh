@@ -118,18 +118,45 @@
     
     /* Fix text sizes */
     .text-xl {
-      font-size: 1.25rem !important;
+      font-size: 1.125rem !important;
       line-height: 1.2 !important;
     }
     
     .text-2xl {
-      font-size: 1.5rem !important;
+      font-size: 1.25rem !important;
       line-height: 1.2 !important;
     }
     
     .text-3xl {
+      font-size: 1.5rem !important;
+      line-height: 1.2 !important;
+    }
+    
+    .text-4xl {
       font-size: 1.75rem !important;
       line-height: 1.2 !important;
+    }
+    
+    .text-5xl {
+      font-size: 2rem !important;
+      line-height: 1.2 !important;
+    }
+    
+    .text-6xl {
+      font-size: 2.25rem !important;
+      line-height: 1.2 !important;
+    }
+    
+    /* Force smaller pro-metric on mobile */
+    .pro-metric {
+      font-size: 1.5rem !important;
+      font-weight: 600 !important;
+    }
+    
+    /* Force smaller pro-subhero on mobile */
+    .pro-subhero {
+      font-size: 1.25rem !important;
+      font-weight: 500 !important;
     }
     
     .text-4xl {
