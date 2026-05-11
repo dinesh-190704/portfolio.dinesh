@@ -46,13 +46,13 @@ export default function BentoScale() {
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.2 }}
-          className="text-center mb-20"
+          className="text-center mb-16 md:mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground text-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground text-tight mb-6 md:mb-8">
             Scale & Security
           </h2>
-          <p className="text-xl text-muted max-w-3xl mx-auto">
-            Enterprise-grade infrastructure management with uncompromising security standards
+          <p className="text-lg md:text-xl text-muted max-w-4xl mx-auto text-professional leading-relaxed">
+            Enterprise-grade infrastructure management with uncompromising security standards and operational excellence
           </p>
         </motion.div>
 
@@ -80,11 +80,11 @@ export default function BentoScale() {
                   </div>
                 </div>
                 
-                <h3 className="text-2xl md:text-3xl font-bold text-foreground text-tight mb-4">
+                <h3 className="text-xl md:text-2xl font-bold text-foreground text-tight mb-3 md:mb-4">
                   {spec.label}
                 </h3>
                 
-                <p className="text-muted leading-relaxed flex-grow">
+                <p className="text-muted text-professional leading-relaxed flex-grow">
                   {spec.description}
                 </p>
               </div>

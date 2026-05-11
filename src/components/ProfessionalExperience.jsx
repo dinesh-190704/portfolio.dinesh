@@ -84,13 +84,13 @@ export default function ProfessionalExperience() {
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.2 }}
-          className="text-center mb-20"
+          className="text-center mb-16 md:mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground text-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground text-tight mb-6 md:mb-8">
             Professional Experience
           </h2>
-          <p className="text-xl text-muted max-w-3xl mx-auto">
-            Comprehensive expertise in healthcare IT infrastructure, database administration, and security operations
+          <p className="text-lg md:text-xl text-muted max-w-4xl mx-auto text-professional leading-relaxed">
+            Healthcare IT infrastructure and database administration expertise with proven results
           </p>
         </motion.div>
 
