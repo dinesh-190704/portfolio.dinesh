@@ -18,6 +18,40 @@
     line-height: 1.47059;
     letter-spacing: -0.022em;
     overflow-x: hidden;
+    min-height: 100vh;
+    width: 100%;
+  }
+
+  /* Mobile viewport fixes */
+  @viewport {
+    width: device-width;
+    initial-scale: 1.0;
+    maximum-scale: 1.0;
+    user-scalable: no;
+  }
+
+  /* Responsive container fixes */
+  .container-responsive {
+    width: 100%;
+    max-width: 100vw;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 640px) {
+    .container-responsive {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+  }
+
+  /* Mobile text scaling */
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
   }
 
   ::selection {

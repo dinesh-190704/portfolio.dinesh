@@ -69,58 +69,105 @@ export default function ProCertificationsWithUpload() {
 
   // Load certificates from localStorage on component mount
   useEffect(() => {
-    const savedCerts = localStorage.getItem('uploadedCertificates');
-    if (savedCerts) {
+    const loadCertificates = () => {
       try {
-        const parsedCerts = JSON.parse(savedCerts);
-        setUploadedCerts(parsedCerts);
+        const savedCerts = localStorage.getItem('uploadedCertificates');
+        if (savedCerts) {
+          const parsedCerts = JSON.parse(savedCerts);
+          // Validate the loaded data
+          if (parsedCerts && typeof parsedCerts === 'object') {
+            setUploadedCerts(parsedCerts);
+            console.log('Loaded certificates from localStorage:', Object.keys(parsedCerts).length);
+          } else {
+            localStorage.removeItem('uploadedCertificates');
+          }
+        }
       } catch (error) {
         console.error('Failed to load certificates from localStorage:', error);
         localStorage.removeItem('uploadedCertificates');
       }
-    }
+    };
+
+    loadCertificates();
   }, []);
 
   // Save certificates to localStorage whenever they change
   useEffect(() => {
-    if (Object.keys(uploadedCerts).length > 0) {
-      localStorage.setItem('uploadedCertificates', JSON.stringify(uploadedCerts));
-    } else {
-      localStorage.removeItem('uploadedCertificates');
-    }
+    const saveCertificates = () => {
+      try {
+        if (Object.keys(uploadedCerts).length > 0) {
+          localStorage.setItem('uploadedCertificates', JSON.stringify(uploadedCerts));
+          console.log('Saved certificates to localStorage:', Object.keys(uploadedCerts).length);
+        } else {
+          localStorage.removeItem('uploadedCertificates');
+        }
+      } catch (error) {
+        console.error('Failed to save certificates to localStorage:', error);
+      }
+    };
+
+    saveCertificates();
   }, [uploadedCerts]);
 
   const handleCertUpload = async (certId, file) => {
     if (!file) return;
+    
+    // Validate file type and size
+    const validTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    
+    if (!validTypes.includes(file.type)) {
+      alert('Please upload a PDF, JPG, or PNG file.');
+      return;
+    }
+    
+    if (file.size > maxSize) {
+      alert('File size must be less than 5MB.');
+      return;
+    }
     
     setUploading(true);
     try {
       // Convert file to base64
       const reader = new FileReader();
       reader.onload = (e) => {
-        const base64Data = e.target.result;
-        const newCert = {
-          fileName: file.name,
-          uploadDate: new Date().toISOString(),
-          fileUrl: base64Data,
-        };
-        
-        setUploadedCerts(prev => ({
-          ...prev,
-          [certId]: newCert,
-        }));
-        
-        setShowUploadModal(false);
-        setSelectedCert(null);
-        setUploading(false);
+        try {
+          const base64Data = e.target.result;
+          const newCert = {
+            fileName: file.name,
+            uploadDate: new Date().toISOString(),
+            fileUrl: base64Data,
+            fileType: file.type,
+            fileSize: file.size,
+          };
+          
+          setUploadedCerts(prev => {
+            const updated = {
+              ...prev,
+              [certId]: newCert,
+            };
+            console.log('Certificate uploaded successfully:', certId);
+            return updated;
+          });
+          
+          setShowUploadModal(false);
+          setSelectedCert(null);
+          setUploading(false);
+        } catch (error) {
+          console.error('Failed to process uploaded file:', error);
+          alert('Failed to process the uploaded file. Please try again.');
+          setUploading(false);
+        }
       };
       reader.onerror = () => {
         console.error('Failed to read file');
+        alert('Failed to read the file. Please try again.');
         setUploading(false);
       };
       reader.readAsDataURL(file);
     } catch (error) {
       console.error('Upload failed:', error);
+      alert('Upload failed. Please try again.');
       setUploading(false);
     }
   };
@@ -160,19 +207,41 @@ export default function ProCertificationsWithUpload() {
     <section ref={ref} className="pro-section bg-background relative">
       <div className="grid-background" />
       
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.2 }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground text-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-foreground text-tight mb-4 md:mb-6">
             Certified Expertise
           </h2>
-          <p className="text-xl text-muted max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-muted max-w-3xl mx-auto mb-6">
             Industry-recognized credentials validating expertise in security, systems, and infrastructure
           </p>
+          
+          {/* Clear All Certificates Button */}
+          {Object.keys(uploadedCerts).length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 }}
+              className="flex justify-center"
+            >
+              <button
+                onClick={() => {
+                  if (window.confirm('Are you sure you want to remove all uploaded certificates? This action cannot be undone.')) {
+                    setUploadedCerts({});
+                    localStorage.removeItem('uploadedCertificates');
+                  }
+                }}
+                className="px-4 md:px-6 py-2 md:py-3 bg-red-500/20 text-red-400 rounded-lg hover:bg-red-500/30 transition-all duration-300 border border-red-500/30 text-sm md:text-base font-medium"
+              >
+                Clear All Certificates ({Object.keys(uploadedCerts).length})
+              </button>
+            </motion.div>
+          )}
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
