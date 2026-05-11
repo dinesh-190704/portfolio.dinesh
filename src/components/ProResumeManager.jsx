@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, X, FileText, Download, Shield, Eye, EyeOff, Trash2 } from 'lucide-react';
-import { persistentStorage } from '../utils/storage';
 
 const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -44,19 +43,18 @@ export default function ProResumeManager() {
   const [loginError, setLoginError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  // Load resume from persistent storage on component mount
+  // Load resume from localStorage on component mount
   useEffect(() => {
-    const loadResume = async () => {
+    const savedResume = localStorage.getItem('uploadedResume');
+    if (savedResume) {
       try {
-        const savedResume = await persistentStorage.loadResume();
-        setResumeUrl(savedResume);
+        const parsedResume = JSON.parse(savedResume);
+        setResumeUrl(parsedResume.fileUrl);
       } catch (error) {
-        console.error('Failed to load resume from persistent storage:', error);
-        setResumeUrl(null);
+        console.error('Failed to load resume from localStorage:', error);
+        localStorage.removeItem('uploadedResume');
       }
-    };
-
-    loadResume();
+    }
   }, []);
 
   // Listen for admin portal trigger from navigation
@@ -97,7 +95,7 @@ export default function ProResumeManager() {
         };
         
         setResumeUrl(base64Data);
-        await persistentStorage.saveResume(base64Data);
+        localStorage.setItem('uploadedResume', JSON.stringify(resumeData));
         setUploading(false);
         console.log('Resume uploaded successfully:', file.name);
       };
@@ -118,7 +116,7 @@ export default function ProResumeManager() {
     setDeleting(true);
     try {
       setResumeUrl(null);
-      await persistentStorage.saveResume(null);
+      localStorage.removeItem('uploadedResume');
     } catch (error) {
       console.error('Delete failed:', error);
     } finally {
