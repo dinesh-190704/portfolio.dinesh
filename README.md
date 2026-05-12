@@ -44,6 +44,36 @@ npm run dev
 npm run build
 ```
 
+## Deployment
+
+This portfolio is automatically deployed to Cloudflare Workers using GitHub Actions.
+
+### Setup for Automatic Deployment
+
+1. **Configure GitHub Secrets:**
+   - Go to your GitHub repository → Settings → Secrets and variables → Actions
+   - Add these repository secrets:
+     - `CLOUDFLARE_API_TOKEN`: Your Cloudflare API token
+     - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
+
+2. **Get Cloudflare Credentials:**
+   - API Token: Go to Cloudflare Dashboard → My Profile → API Tokens → Create Token
+   - Account ID: Found in Cloudflare Dashboard → right sidebar
+
+3. **Automatic Deployment:**
+   - Push to `main` or `master` branch → Automatic deployment to Cloudflare Workers
+   - Pull requests → Build test (no deployment)
+
+### Manual Deployment
+
+```bash
+# Install Wrangler CLI
+npm install -g wrangler
+
+# Deploy to Cloudflare Workers
+wrangler deploy --env production
+```
+
 ## Author
 
 Dinesh M - Healthcare IT Professional | Database Administrator | Security Specialist
